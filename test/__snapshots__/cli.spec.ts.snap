@@ -60,18 +60,6 @@ export * from './addedDir/'
 export * from './watch'"
 `;
 
-exports[`watch mode should run --watch mode, watch dir add: After watch 1`] = `
-"// created by autobarrel, do not modify directly
-
-export * from './watch'"
-`;
-
-exports[`watch mode should run --watch mode, watch dir add: Before watch 1`] = `
-"// created by autobarrel, do not modify directly
-
-export * from './watch'"
-`;
-
 exports[`watch mode should run --watch mode, watch file add: After file add 1`] = `
 "// created by autobarrel, do not modify directly
 

@@ -84,28 +84,30 @@ describe("watch mode", () => {
       path.join(__dirname, "testing/testDir/watchTest/added.ts"),
       "export const added = {}"
     )
-    await delay(1000)
+    let hasAdded = false
+    do {
+      hasAdded = (
+        await fs.readFile(
+          path.join(__dirname, "testing/testDir/watchTest/index.ts"),
+          "utf8"
+        )
+      ).includes("./added")
+      await delay(10)
+    } while (!hasAdded)
+
     expect(await readWatchIndex()).toMatchSnapshot("After file add")
   })
 
   test("should run --watch mode, watch file remove", async () => {
     expect(await readWatchIndex()).toMatchSnapshot("Before file remove")
     await fs.unlink(path.join(__dirname, "testing/testDir/watchTest/watch.ts"))
-    await delay(1000)
-    expect(readWatchIndex()).rejects.toHaveProperty(
-      "message",
-      expect.stringContaining("ENOENT: no such file or directory")
-    )
-  })
-
-  test("should run --watch mode, watch dir add", async () => {
-    expect(await readWatchIndex()).toMatchSnapshot("Before watch")
-    await fs.mkdirp(path.join(__dirname, "testing/testDir/watchTest/addedDir"))
-    await fs.writeFile(
-      path.join(__dirname, "testing/testDir/watchTest/addedDir/watch.ts"),
-      "export const addedDir = {}"
-    )
-    expect(await readWatchIndex()).toMatchSnapshot("After watch")
+    let hasRemoved = false
+    do {
+      hasRemoved = !fs.existsSync(
+        path.join(__dirname, "testing/testDir/watchTest/index.ts")
+      )
+      await delay(10)
+    } while (!hasRemoved)
   })
 
   describe("dir remove", () => {
@@ -117,7 +119,16 @@ describe("watch mode", () => {
         path.join(__dirname, "testing/testDir/watchTest/addedDir/watch.ts"),
         "export const addedDir = {}"
       )
-      await delay(1000)
+      let hasAdded = false
+      do {
+        hasAdded = (
+          await fs.readFile(
+            path.join(__dirname, "testing/testDir/watchTest/index.ts"),
+            "utf8"
+          )
+        ).includes("./addedDir")
+        await delay(10)
+      } while (!hasAdded)
     })
 
     test("should run --watch mode, watch dir remove", async () => {
@@ -125,7 +136,16 @@ describe("watch mode", () => {
       await fs.remove(
         path.join(__dirname, "testing/testDir/watchTest/addedDir")
       )
-      await delay(1000)
+      let hasRemoved = false
+      do {
+        hasRemoved = !(
+          await fs.readFile(
+            path.join(__dirname, "testing/testDir/watchTest/index.ts"),
+            "utf8"
+          )
+        ).includes("./addedDir")
+        await delay(10)
+      } while (!hasRemoved)
       expect(await readWatchIndex()).toMatchSnapshot("After dir remove")
     })
   })

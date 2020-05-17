@@ -186,23 +186,33 @@ export type AutoBarrelWatchData = AutoBarrelData & {
 
 export async function autobarrelWatch(configData: AutoBarrelWatchData) {
   let running = false
+  let needsRerun = 0
   await autobarrel(configData)
   const watcher = chokidar.watch(configData.paths, {
     ignoreInitial: true,
     ignored: configData.ignore ?? [],
   })
   async function maybeAutobarrel(p: string) {
-    if (!running) {
-      running = true
-      try {
-        if (configData.verbose) {
-          console.log(`Autobarrel running due to ${p}`)
-        }
-        await autobarrel(configData)
-      } catch (e) {
-        console.error(e)
-      } finally {
-        running = false
+    if (running) {
+      if (!p.endsWith("index.ts")) {
+        needsRerun++
+      }
+      return
+    }
+    running = true
+    try {
+      if (configData.verbose) {
+        console.log(`Autobarrel running due to ${p}`)
+      }
+      await autobarrel(configData)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      running = false
+      const shouldRerun = needsRerun > 0
+      needsRerun = 0
+      if (shouldRerun) {
+        maybeAutobarrel("Changes during last autobarrel")
       }
     }
   }
@@ -212,7 +222,6 @@ export async function autobarrelWatch(configData: AutoBarrelWatchData) {
       maybeAutobarrel(e)
     }
   })
-  watcher.on("addDir", maybeAutobarrel)
   watcher.on("unlink", (e) => {
     if (e.match(/\.tsx?$/)) {
       maybeAutobarrel(e)

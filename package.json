@@ -11,7 +11,7 @@
     "postinstall": "typesync",
     "prepublish": "rm -rf dist && tsc && chmod +x dist/cli.js",
     "watch": "tsc --watch",
-    "test": "node -r ts-node/register/transpile-only ./node_modules/.bin/jest --runInBand"
+    "test": "node ./node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
     "glob": "^7.1.6",
@@ -31,7 +31,6 @@
     "p-defer": "3.0.0",
     "prettier": "^2.0.5",
     "ts-jest": "^26.0.0",
-    "ts-node": "^8.10.1",
     "typescript": "^3.9.2",
     "typesync": "0.6.1"
   }

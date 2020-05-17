@@ -16,6 +16,25 @@ Caveats:
 autobarrel [--config path/to/autobarrel.json] [--watch]
 ```
 
+autobarrel.json:
+
+```ts
+{
+  /**
+   * Relative glob patterns we want to process
+   */
+  paths: string[]
+  /**
+   * Relative glob patterns we want to ignore entirely
+   */
+  ignore?: string[]
+  /**
+   * Relative glob patterns of files / directories we want to avoid re-exporting
+   */
+  exclude?: string[]
+}
+```
+
 ### Programmatic Usage:
 
 ```ts

@@ -4,6 +4,7 @@ import glob from "glob"
 import * as path from "path"
 import util from "util"
 
+const unlinkAsync = util.promisify(fs.unlink)
 const statAsync = util.promisify(fs.stat)
 const writeFileAsync = util.promisify(fs.writeFile)
 const readFileAsync = util.promisify(fs.readFile)
@@ -115,13 +116,14 @@ export async function autobarrel(configData: AutoBarrelData) {
     }
   })
 
-  Object.entries(toBarrelMap).forEach(([key, val]) => {
-    maybeDestroy(key, val)
-  })
+  const toRemove: string[] = []
 
-  function maybeDestroy(key: string, val: Set<string>) {
+  const maybeDestroy = (key: string, val: Set<string>) => {
     if (toBarrelMap[key]) {
       if (val.size === 1) {
+        if (globbedFiles.has(path.join(key, "index.ts"))) {
+          toRemove.push(path.join(key, "index.ts"))
+        }
         delete toBarrelMap[key]
         const p = path.dirname(key)
         if (toBarrelMap[p]) {
@@ -132,24 +134,37 @@ export async function autobarrel(configData: AutoBarrelData) {
     }
   }
 
-  const pathsWritten = await Promise.all(
-    Object.entries(toBarrelMap).map(async ([key, val]) => {
-      const lines = ["// created by autobarrel, do not modify directly\n"]
-      const toAdd = Array.from(val).sort()
+  Object.entries(toBarrelMap).forEach(([key, val]) => {
+    maybeDestroy(key, val)
+  })
 
-      toAdd
-        .map((p) => path.relative(key, p))
-        .map((p) => (path.extname(p) ? p : `${p}/`))
-        .forEach((p) => {
-          if (path.basename(p) !== "index.ts") {
-            lines.push(`export * from './${p.replace(/\.tsx?$/, "")}'`)
-          }
-        })
-      const writePath = path.join(key, "index.ts")
-      await writeFileAsync(writePath, lines.join("\n"))
-      return writePath
-    })
-  )
+  const [pathsWritten] = await Promise.all([
+    Promise.all(
+      Object.entries(toBarrelMap).map(async ([key, val]) => {
+        const lines = ["// created by autobarrel, do not modify directly\n"]
+        const toAdd = Array.from(val).sort()
+
+        toAdd
+          .map((p) => path.relative(key, p))
+          .map((p) => (path.extname(p) ? p : `${p}/`))
+          .forEach((p) => {
+            if (path.basename(p) !== "index.ts") {
+              lines.push(`export * from './${p.replace(/\.tsx?$/, "")}'`)
+            }
+          })
+        const writePath = path.join(key, "index.ts")
+        await writeFileAsync(writePath, lines.join("\n"))
+        return writePath
+      })
+    ),
+    Promise.all(
+      toRemove.map(async (file) => {
+        try {
+          await unlinkAsync(file)
+        } catch {}
+      })
+    ),
+  ])
 
   return pathsWritten.sort()
 }

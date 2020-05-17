@@ -41,6 +41,9 @@ Array [
   "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/someDir",
   "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/someDir/app.ts",
   "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/someDir/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/watchTest",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/watchTest/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/watchTest/watch.ts",
 ]
 `;
 
@@ -76,7 +79,8 @@ export * from './excludedFile/'
 export * from './excludedPattern/'
 export * from './jsTs/'
 export * from './some/'
-export * from './someDir/'"
+export * from './someDir/'
+export * from './watchTest/'"
 `;
 
 exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/jsTs/index.ts 1`] = `
@@ -109,6 +113,12 @@ exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/tes
 export * from './app'"
 `;
 
+exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/watchTest/index.ts 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './watch'"
+`;
+
 exports[`autobarrel autobarrel tests: Paths Written 1`] = `
 Array [
   "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludeDts/index.ts",
@@ -121,5 +131,6 @@ Array [
   "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/deep/path/index.ts",
   "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/index.ts",
   "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/someDir/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/watchTest/index.ts",
 ]
 `;

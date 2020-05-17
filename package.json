@@ -8,8 +8,10 @@
     "autobarrel": "dist/cli.js"
   },
   "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc",
     "postinstall": "typesync",
-    "prepublish": "rm -rf dist && tsc && chmod +x dist/cli.js",
+    "prepublish": "yarn clean && yarn build && chmod +x dist/cli.js",
     "watch": "tsc --watch",
     "test": "node ./node_modules/.bin/jest --runInBand"
   },

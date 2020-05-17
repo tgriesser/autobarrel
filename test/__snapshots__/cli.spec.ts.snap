@@ -47,6 +47,19 @@ Array [
 ]
 `;
 
+exports[`watch mode dir remove should run --watch mode, watch dir remove: After dir remove 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './watch'"
+`;
+
+exports[`watch mode dir remove should run --watch mode, watch dir remove: Before dir remove 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './addedDir/'
+export * from './watch'"
+`;
+
 exports[`watch mode should run --watch mode, watch file add: After file add 1`] = `
 "// created by autobarrel, do not modify directly
 
@@ -55,6 +68,12 @@ export * from './watch'"
 `;
 
 exports[`watch mode should run --watch mode, watch file add: Before file add 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './watch'"
+`;
+
+exports[`watch mode should run --watch mode, watch file remove: Before file remove 1`] = `
 "// created by autobarrel, do not modify directly
 
 export * from './watch'"

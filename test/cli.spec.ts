@@ -78,7 +78,7 @@ describe("watch mode", () => {
     return new Promise((resolve) => setTimeout(resolve, ms))
   }
 
-  test.only("should run --watch mode, watch file add", async () => {
+  test("should run --watch mode, watch file add", async () => {
     expect(await readWatchIndex()).toMatchSnapshot("Before file add")
     await fs.writeFile(
       path.join(__dirname, "testing/testDir/watchTest/added.ts"),

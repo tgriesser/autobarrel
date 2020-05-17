@@ -168,7 +168,7 @@ export async function autobarrel(configData: AutoBarrelData) {
     Promise.all(
       toRemove.map(async (file) => {
         try {
-          await unlinkAsync(file)
+          await unlinkAsync(path.join(configData.cwd, file))
         } catch {}
       })
     ),
@@ -187,14 +187,14 @@ export type AutoBarrelWatchData = AutoBarrelData & {
 export async function autobarrelWatch(configData: AutoBarrelWatchData) {
   let running = false
   let needsRerun = 0
-  await autobarrel(configData)
   const watcher = chokidar.watch(configData.paths, {
+    cwd: configData.cwd,
     ignoreInitial: true,
     ignored: configData.ignore ?? [],
   })
-  async function maybeAutobarrel(p: string) {
+  async function maybeAutobarrel(reason: string, file: string = "") {
     if (running) {
-      if (!p.endsWith("index.ts")) {
+      if (!file.endsWith("index.ts")) {
         needsRerun++
       }
       return
@@ -202,7 +202,7 @@ export async function autobarrelWatch(configData: AutoBarrelWatchData) {
     running = true
     try {
       if (configData.verbose) {
-        console.log(`Autobarrel running due to ${p}`)
+        console.log(`Autobarrel running due to ${reason} - ${file}`)
       }
       await autobarrel(configData)
     } catch (e) {
@@ -216,18 +216,19 @@ export async function autobarrelWatch(configData: AutoBarrelWatchData) {
       }
     }
   }
-  console.log("Autobarrel watching...")
   watcher.on("add", (e) => {
     if (e.match(/\.tsx?$/)) {
-      maybeAutobarrel(e)
+      maybeAutobarrel("add", e)
     }
   })
   watcher.on("unlink", (e) => {
     if (e.match(/\.tsx?$/)) {
-      maybeAutobarrel(e)
+      maybeAutobarrel("unlink", e)
     }
   })
-  watcher.on("unlinkDir", maybeAutobarrel)
+  watcher.on("unlinkDir", (e) => maybeAutobarrel("unlinkDir", e))
+  await maybeAutobarrel("Intial Autobarrel")
+  console.log("Autobarrel watching...")
   return watcher
 }
 

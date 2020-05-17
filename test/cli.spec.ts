@@ -55,7 +55,7 @@ describe("watch mode", () => {
       if (String(chunk).includes("Autobarrel watching")) {
         dfd.resolve()
       } else {
-        console.log(String(chunk))
+        process.stdout.write(chunk)
       }
     })
     spawned.stderr?.pipe(process.stderr)
@@ -63,7 +63,7 @@ describe("watch mode", () => {
   })
 
   afterEach(() => {
-    spawned.kill("SIGKILL")
+    spawned.kill("SIGINT")
     spawned.removeAllListeners()
   })
 
@@ -78,7 +78,7 @@ describe("watch mode", () => {
     return new Promise((resolve) => setTimeout(resolve, ms))
   }
 
-  test("should run --watch mode, watch file add", async () => {
+  test.only("should run --watch mode, watch file add", async () => {
     expect(await readWatchIndex()).toMatchSnapshot("Before file add")
     await fs.writeFile(
       path.join(__dirname, "testing/testDir/watchTest/added.ts"),
@@ -92,9 +92,8 @@ describe("watch mode", () => {
           "utf8"
         )
       ).includes("./added")
-      await delay(10)
+      await delay(100)
     } while (!hasAdded)
-
     expect(await readWatchIndex()).toMatchSnapshot("After file add")
   })
 
@@ -106,7 +105,7 @@ describe("watch mode", () => {
       hasRemoved = !fs.existsSync(
         path.join(__dirname, "testing/testDir/watchTest/index.ts")
       )
-      await delay(10)
+      await delay(100)
     } while (!hasRemoved)
   })
 
@@ -127,7 +126,7 @@ describe("watch mode", () => {
             "utf8"
           )
         ).includes("./addedDir")
-        await delay(10)
+        await delay(100)
       } while (!hasAdded)
     })
 
@@ -144,7 +143,7 @@ describe("watch mode", () => {
             "utf8"
           )
         ).includes("./addedDir")
-        await delay(10)
+        await delay(100)
       } while (!hasRemoved)
       expect(await readWatchIndex()).toMatchSnapshot("After dir remove")
     })

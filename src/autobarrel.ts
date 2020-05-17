@@ -19,6 +19,10 @@ export type AutoBarrelConfig = {
 
 export type AutoBarrelData = {
   /**
+   * Current working directory for the globs
+   */
+  cwd: string
+  /**
    * Absolute glob patterns we want to process
    */
   paths: string[]
@@ -40,14 +44,14 @@ export async function autobarrel(configData: AutoBarrelData) {
   promises.push(
     ...(configData.exclude?.map(async (p) => {
       const exclude = await globAsync(p, {
+        cwd: configData.cwd,
         ignore: configData.ignore || [],
       })
       exclude.map((e) => {
         if (path.extname(e) === "") {
-          excludeFiles.add(e + "/index.ts")
-        } else {
-          excludeFiles.add(e)
+          e = `${e}/index.ts`
         }
+        excludeFiles.add(path.normalize(e))
       })
     }) ?? [])
   )
@@ -55,9 +59,10 @@ export async function autobarrel(configData: AutoBarrelData) {
   promises.push(
     ...configData.paths.map(async (p) => {
       const added = await globAsync(p, {
+        cwd: configData.cwd,
         ignore: configData.ignore || [],
       })
-      added.map((a) => globbedFiles.add(a))
+      added.map((a) => globbedFiles.add(path.normalize(a)))
     })
   )
 
@@ -79,7 +84,7 @@ export async function autobarrel(configData: AutoBarrelData) {
 
   await Promise.all(
     dirCandidates.map(async (dir) => {
-      const stat = await statAsync(dir)
+      const stat = await statAsync(path.join(configData.cwd, dir))
       if (stat.isDirectory()) {
         directories.add(dir)
         const barrelFile = path.join(dir, "index.ts")
@@ -153,7 +158,10 @@ export async function autobarrel(configData: AutoBarrelData) {
             }
           })
         const writePath = path.join(key, "index.ts")
-        await writeFileAsync(writePath, lines.join("\n"))
+        await writeFileAsync(
+          path.join(configData.cwd, writePath),
+          lines.join("\n")
+        )
         return writePath
       })
     ),
@@ -215,22 +223,21 @@ export async function autobarrelWatch(configData: AutoBarrelWatchData) {
 }
 
 export async function resolveAutobarrelConfig(config: AutoBarrelConfig) {
-  if (!path.isAbsolute(config.path)) {
-    throw new Error(
-      `resolveAutobarrelConfig expects config.path to be absolute`
-    )
-  }
-  const stat = await statAsync(config.path)
+  let configPath = path.isAbsolute(config.path)
+    ? config.path
+    : path.join(process.cwd(), config.path)
+  const stat = await statAsync(configPath)
+
   if (!stat.isFile()) {
-    throw new Error(`Autobarrel config ${config.path} is not a file`)
+    throw new Error(`Autobarrel config ${configPath} is not a file`)
   }
-  let configData: AutoBarrelData
+  let configData: Omit<AutoBarrelData, "cwd">
   try {
-    configData = JSON.parse(await readFileAsync(config.path, "utf8"))
+    configData = JSON.parse(await readFileAsync(configPath, "utf8"))
   } catch (e) {
     if (e instanceof SyntaxError) {
       throw new Error(
-        `Invalid syntax in the autobarrel JSON file: ${config.path}`
+        `Invalid syntax in the autobarrel JSON file: ${configPath}`
       )
     }
     throw e
@@ -249,15 +256,8 @@ export async function resolveAutobarrelConfig(config: AutoBarrelConfig) {
       `Expected autobarrel ignore to be an array, saw ${configData.exclude}`
     )
   }
-  const absPathDir = path.dirname(config.path)
-
-  Object.keys(configData).forEach((k) => {
-    const key = k as keyof typeof configData
-    if (Array.isArray(configData[key])) {
-      configData[key] = configData[key]!.map((p) =>
-        path.isAbsolute(p) ? p : path.join(absPathDir, p)
-      )
-    }
-  })
-  return configData
+  return {
+    cwd: path.dirname(configPath),
+    ...configData,
+  }
 }

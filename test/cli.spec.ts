@@ -22,7 +22,7 @@ afterEach(() => {
 
 describe("autobarrel cli", () => {
   test("should run the CLI", async () => {
-    const result = childProcess.spawnSync(
+    childProcess.spawnSync(
       "./cli.js",
       ["--config", path.join(__dirname, "testing", "autobarrel.json")],
       {
@@ -30,7 +30,9 @@ describe("autobarrel cli", () => {
         stdio: "inherit",
       }
     )
-    const globbed = await globAsync(path.join(__dirname, "testing/**"))
+    const globbed = await globAsync("testing/**", {
+      cwd: __dirname,
+    })
     expect(globbed).toMatchSnapshot()
   })
 })

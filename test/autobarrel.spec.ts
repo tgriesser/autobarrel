@@ -26,12 +26,16 @@ describe("autobarrel", () => {
         path: path.join(__dirname, "testing", "autobarrel.json"),
       })
     )
-    const globFiles = glob.sync(path.join(__dirname, "testing/**"))
+    const globFiles = glob.sync("testing/**", {
+      cwd: __dirname,
+    })
     expect(globFiles).toMatchSnapshot()
     const indexFiles = globFiles.filter((f) => f.endsWith("index.ts"))
 
     indexFiles.map((f) => {
-      expect(fs.readFileSync(f, "utf8")).toMatchSnapshot(f)
+      expect(fs.readFileSync(path.join(__dirname, f), "utf8")).toMatchSnapshot(
+        f
+      )
     })
 
     expect(pathsWritten).toMatchSnapshot("Paths Written")

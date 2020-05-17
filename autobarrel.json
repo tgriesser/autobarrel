@@ -1,0 +1,4 @@
+{
+  "paths": ["src/**"],
+  "exclude": ["src/cli.ts"]
+}

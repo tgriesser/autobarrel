@@ -1,0 +1,9 @@
+{
+  "paths": ["./testDir/**"],
+  "ignore": ["./testDir/ignoredDir/**"],
+  "exclude": [
+    "./testDir/excludedDir",
+    "./testDir/excludedFile/excludedFile.ts",
+    "./testDir/excludedPattern/*.bin.ts"
+  ]
+}

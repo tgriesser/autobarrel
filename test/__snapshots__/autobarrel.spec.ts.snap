@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`autobarrel autobarrel tests 1`] = `
+Array [
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/autobarrel.json",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/README.md",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedDir",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedDir/excluded.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedDir/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedFile",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedFile/excludedFile.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedFile/includedFile.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedFile/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedPattern",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedPattern/abc.bin.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedPattern/def.bin.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedPattern/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedPattern/some.gen.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludeDts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludeDts/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludeDts/nonDts.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludeDts/something.d.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/ignoredDir",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/ignoredDir/ignoredDir.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/jsTs",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/jsTs/file.js",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/jsTs/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/jsTs/tsFile.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/noTsFiles",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/noTsFiles/README.md",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/deep",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/deep/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/deep/path",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/deep/path/file.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/deep/path/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/someDir",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/someDir/app.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/someDir/index.ts",
+]
+`;
+
+exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludeDts/index.ts 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './nonDts'"
+`;
+
+exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedDir/index.ts 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './excluded'"
+`;
+
+exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedFile/index.ts 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './includedFile'"
+`;
+
+exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedPattern/index.ts 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './some.gen'"
+`;
+
+exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/index.ts 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './excludeDts/'
+export * from './excludedFile/'
+export * from './excludedPattern/'
+export * from './jsTs/'
+export * from './some/'
+export * from './someDir/'"
+`;
+
+exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/jsTs/index.ts 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './tsFile'"
+`;
+
+exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/deep/index.ts 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './path/'"
+`;
+
+exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/deep/path/index.ts 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './file'"
+`;
+
+exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/index.ts 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './deep/'"
+`;
+
+exports[`autobarrel autobarrel tests: /Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/someDir/index.ts 1`] = `
+"// created by autobarrel, do not modify directly
+
+export * from './app'"
+`;
+
+exports[`autobarrel autobarrel tests: Paths Written 1`] = `
+Array [
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludeDts/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedDir/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedFile/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/excludedPattern/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/jsTs/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/deep/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/deep/path/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/some/index.ts",
+  "/Users/tgriesser/Github/oss/autobarrel/test/testing/testDir/someDir/index.ts",
+]
+`;

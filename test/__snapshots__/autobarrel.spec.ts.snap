@@ -66,25 +66,29 @@ Array [
 exports[`autobarrel autobarrel tests: testing/testDir/excludeDts/index.ts 1`] = `
 "// created by autobarrel, do not modify directly
 
-export * from './nonDts'"
+export * from './nonDts'
+"
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/excludedDir/index.ts 1`] = `
 "// created by autobarrel, do not modify directly
 
-export * from './excluded'"
+export * from './excluded'
+"
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/excludedFile/index.ts 1`] = `
 "// created by autobarrel, do not modify directly
 
-export * from './includedFile'"
+export * from './includedFile'
+"
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/excludedPattern/index.ts 1`] = `
 "// created by autobarrel, do not modify directly
 
-export * from './some.gen'"
+export * from './some.gen'
+"
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/index.ts 1`] = `
@@ -96,41 +100,48 @@ export * from './excludedPattern/'
 export * from './jsTs/'
 export * from './some/'
 export * from './someDir/'
-export * from './watchTest/'"
+export * from './watchTest/'
+"
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/jsTs/index.ts 1`] = `
 "// created by autobarrel, do not modify directly
 
-export * from './tsFile'"
+export * from './tsFile'
+"
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/some/deep/index.ts 1`] = `
 "// created by autobarrel, do not modify directly
 
-export * from './path/'"
+export * from './path/'
+"
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/some/deep/path/index.ts 1`] = `
 "// created by autobarrel, do not modify directly
 
-export * from './file'"
+export * from './file'
+"
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/some/index.ts 1`] = `
 "// created by autobarrel, do not modify directly
 
-export * from './deep/'"
+export * from './deep/'
+"
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/someDir/index.ts 1`] = `
 "// created by autobarrel, do not modify directly
 
-export * from './app'"
+export * from './app'
+"
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/watchTest/index.ts 1`] = `
 "// created by autobarrel, do not modify directly
 
-export * from './watch'"
+export * from './watch'
+"
 `;

@@ -146,7 +146,7 @@ export async function autobarrel(configData: AutoBarrelData) {
   const [pathsWritten] = await Promise.all([
     Promise.all(
       Object.entries(toBarrelMap).map(async ([key, val]) => {
-        const lines = ["// created by autobarrel, do not modify directly\n"]
+        const lines = ["// created by autobarrel, do not modify directly\n\n"]
         const toAdd = Array.from(val).sort()
 
         toAdd
@@ -154,13 +154,13 @@ export async function autobarrel(configData: AutoBarrelData) {
           .map((p) => (path.extname(p) ? p : `${p}/`))
           .forEach((p) => {
             if (path.basename(p) !== "index.ts") {
-              lines.push(`export * from './${p.replace(/\.tsx?$/, "")}'`)
+              lines.push(`export * from './${p.replace(/\.tsx?$/, "")}'\n`)
             }
           })
         const writePath = path.join(key, "index.ts")
         await writeFileAsync(
           path.join(configData.cwd, writePath),
-          lines.join("\n")
+          lines.join("")
         )
         return writePath
       })

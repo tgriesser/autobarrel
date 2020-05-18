@@ -8,12 +8,11 @@
     "autobarrel": "dist/cli.js"
   },
   "scripts": {
-    "clean": "rm -rf dist",
     "build": "tsc",
-    "postinstall": "typesync",
-    "prepublish": "yarn clean && yarn build && chmod +x dist/cli.js",
-    "watch": "tsc --watch",
-    "test": "node ./node_modules/.bin/jest --runInBand"
+    "clean": "rm -rf dist",
+    "prepublishOnly": "yarn clean && yarn build && chmod +x dist/cli.js",
+    "test": "node ./node_modules/.bin/jest --runInBand",
+    "watch": "tsc --watch"
   },
   "dependencies": {
     "glob": "^7.1.6",
@@ -22,7 +21,6 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.5",
     "@types/fs-extra": "^9.0.0",
     "@types/glob": "5.0.35",
     "@types/jest": "^25.2.2",
@@ -33,7 +31,6 @@
     "p-defer": "3.0.0",
     "prettier": "^2.0.5",
     "ts-jest": "^26.0.0",
-    "typescript": "^3.9.2",
-    "typesync": "0.6.1"
+    "typescript": "^3.9.2"
   }
 }

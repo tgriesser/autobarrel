@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
-    "prepublishOnly": "yarn clean && yarn build && chmod +x dist/cli.js",
+    "prepublish": "yarn clean && yarn build && chmod +x dist/cli.js",
     "test": "node ./node_modules/.bin/jest --runInBand",
     "watch": "tsc --watch"
   },

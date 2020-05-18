@@ -1,6 +1,6 @@
 {
   "name": "autobarrel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -15,8 +15,8 @@
     "watch": "tsc --watch"
   },
   "dependencies": {
-    "glob": "^7.1.6",
     "chokidar": "^3.4.0",
+    "glob": "^7.1.6",
     "minimist": "^1.2.5",
     "tslib": "^2.0.0"
   },

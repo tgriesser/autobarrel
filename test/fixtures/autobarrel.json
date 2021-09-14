@@ -1,4 +1,5 @@
 {
+  "prefix": "/* eslint-disable */",
   "paths": ["./testDir/**"],
   "ignore": ["./testDir/ignoredDir/**"],
   "exclude": [

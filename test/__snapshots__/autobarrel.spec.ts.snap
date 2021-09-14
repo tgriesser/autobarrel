@@ -64,35 +64,40 @@ Array [
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/excludeDts/index.ts 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './nonDts'
 "
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/excludedDir/index.ts 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './excluded'
 "
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/excludedFile/index.ts 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './includedFile'
 "
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/excludedPattern/index.ts 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './some.gen'
 "
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/index.ts 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './excludeDts/'
 export * from './excludedFile/'
@@ -105,42 +110,48 @@ export * from './watchTest/'
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/jsTs/index.ts 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './tsFile'
 "
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/some/deep/index.ts 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './path/'
 "
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/some/deep/path/index.ts 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './file'
 "
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/some/index.ts 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './deep/'
 "
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/someDir/index.ts 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './app'
 "
 `;
 
 exports[`autobarrel autobarrel tests: testing/testDir/watchTest/index.ts 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './watch'
 "

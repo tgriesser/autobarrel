@@ -19,6 +19,10 @@ export type AutoBarrelConfig = {
 
 export type AutoBarrelData = {
   /**
+   * Prefix to the file
+   */
+  prefix?: string
+  /**
    * Current working directory for the globs
    */
   cwd: string
@@ -147,6 +151,11 @@ export async function autobarrel(configData: AutoBarrelData) {
     Promise.all(
       Object.entries(toBarrelMap).map(async ([key, val]) => {
         const lines = ["// created by autobarrel, do not modify directly\n\n"]
+
+        if (configData.prefix) {
+          lines.unshift(`${configData.prefix}\n`)
+        }
+
         const toAdd = Array.from(val).sort()
 
         toAdd

@@ -1,4 +1,5 @@
 dist
 test/testing
+test/tsTesting
 node_modules
 yarn-error.log

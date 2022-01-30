@@ -29,7 +29,10 @@ const confPath = argv.config
     : path.join(process.cwd(), argv.config)
   : path.join(process.cwd(), "autobarrel.json")
 
-if (!fs.existsSync(confPath)) {
+if (
+  !fs.existsSync(confPath) &&
+  !fs.existsSync(confPath.replace(path.basename(confPath), "tsconfig.json"))
+) {
   throw new Error(
     `Could not find autobarrel.json file at ${confPath}, specify a valid path via --config`
   )

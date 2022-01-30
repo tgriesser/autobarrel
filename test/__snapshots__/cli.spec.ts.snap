@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`autobarrel cli (tsconfig.json) should run the CLI 1`] = `
+Array [
+  "tsTesting",
+  "tsTesting/src",
+  "tsTesting/src/file.ts",
+  "tsTesting/src/ignored",
+  "tsTesting/src/ignored/some-file.test.ts",
+  "tsTesting/src/index.ts",
+  "tsTesting/tsconfig.json",
+]
+`;
+
 exports[`autobarrel cli should run the CLI 1`] = `
 Array [
   "testing",
@@ -48,14 +60,16 @@ Array [
 `;
 
 exports[`watch mode dir remove should run --watch mode, watch dir remove: After dir remove 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './watch'
 "
 `;
 
 exports[`watch mode dir remove should run --watch mode, watch dir remove: Before dir remove 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './addedDir/'
 export * from './watch'
@@ -63,7 +77,8 @@ export * from './watch'
 `;
 
 exports[`watch mode should run --watch mode, watch file add: After file add 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './added'
 export * from './watch'
@@ -71,14 +86,16 @@ export * from './watch'
 `;
 
 exports[`watch mode should run --watch mode, watch file add: Before file add 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './watch'
 "
 `;
 
 exports[`watch mode should run --watch mode, watch file remove: Before file remove 1`] = `
-"// created by autobarrel, do not modify directly
+"/* eslint-disable */
+// created by autobarrel, do not modify directly
 
 export * from './watch'
 "

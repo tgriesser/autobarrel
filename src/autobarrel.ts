@@ -241,12 +241,40 @@ export async function autobarrelWatch(configData: AutoBarrelWatchData) {
   return watcher
 }
 
+async function resolveAutobarrelFromTsconfig(configPath: string, e: any) {
+  try {
+    const tsConfigPath = configPath.replace(
+      path.basename(configPath),
+      `tsconfig.json`
+    )
+    const tsConfigData = JSON.parse(await readFileAsync(tsConfigPath, "utf8"))
+    const toInclude = Array.isArray(tsConfigData?.include)
+      ? tsConfigData?.include
+      : tsConfigData?.compilerOptions?.rootDir
+      ? [`${tsConfigData?.compilerOptions?.rootDir}/**`]
+      : null
+
+    if (toInclude) {
+      return {
+        cwd: path.dirname(configPath),
+        paths: toInclude,
+        ignore: tsConfigData?.exclude ?? [],
+      }
+    }
+  } catch {}
+  throw e
+}
+
 export async function resolveAutobarrelConfig(config: AutoBarrelConfig) {
   let configPath = path.isAbsolute(config.path)
     ? config.path
     : path.join(process.cwd(), config.path)
-  const stat = await statAsync(configPath)
-
+  let stat: fs.Stats
+  try {
+    stat = await statAsync(configPath)
+  } catch (e) {
+    return await resolveAutobarrelFromTsconfig(configPath, e)
+  }
   if (!stat.isFile()) {
     throw new Error(`Autobarrel config ${configPath} is not a file`)
   }

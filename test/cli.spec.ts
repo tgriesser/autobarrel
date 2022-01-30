@@ -12,11 +12,21 @@ beforeEach(() => {
     fs.rmdirSync(path.join(__dirname, "testing"), { recursive: true })
   } catch {}
   fs.copySync(path.join(__dirname, "fixtures"), path.join(__dirname, "testing"))
+  try {
+    fs.rmdirSync(path.join(__dirname, "tsTesting"), { recursive: true })
+  } catch {}
+  fs.copySync(
+    path.join(__dirname, "tsFixtures"),
+    path.join(__dirname, "tsTesting")
+  )
 })
 
 afterEach(() => {
   try {
     fs.rmdirSync(path.join(__dirname, "testing"), { recursive: true })
+  } catch {}
+  try {
+    fs.rmdirSync(path.join(__dirname, "tsTesting"), { recursive: true })
   } catch {}
 })
 
@@ -31,6 +41,23 @@ describe("autobarrel cli", () => {
       }
     )
     const globbed = await globAsync("testing/**", {
+      cwd: __dirname,
+    })
+    expect(globbed).toMatchSnapshot()
+  })
+})
+
+describe("autobarrel cli (tsconfig.json)", () => {
+  test("should run the CLI", async () => {
+    childProcess.spawnSync(
+      "./cli.js",
+      ["--config", path.join(__dirname, "./tsTesting", "autobarrel.json")],
+      {
+        cwd: path.join(__dirname, "../dist"),
+        stdio: "inherit",
+      }
+    )
+    const globbed = await globAsync("tsTesting/**", {
       cwd: __dirname,
     })
     expect(globbed).toMatchSnapshot()
